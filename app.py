@@ -4,7 +4,7 @@ import google.generativeai as genai
 st.title("🤖 Google Gemini Free Chatbot")
 
 # Streamlit secrets-ээс Gemini API түлхүүрийг унших
-genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 # Үнэгүй бөгөөд хурдан Gemini загварыг сонгох
 model = genai.GenerativeModel("gemini-1.5-flash")
