@@ -23,20 +23,19 @@ if prompt := st.chat_input("Юуны тухай ярилцах вэ?"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-   chat = client.chats.create(model="gemini-2.0-flash", history=formatted_history)
+        try:
             # Өмнөх түүхийг Gemini-д тохирох хэлбэрт оруулах
             formatted_history = [
                 {"role": m["role"], "parts": [m["content"]]} 
                 for m in st.session_state.messages[:-1]
             ]
             
-            # Чат сесс эхлүүлж хариу авах (gemini-2.5-flash эсвэл gemini-1.5-flash)
-            chat = client.chats.create(model="gemini-1.5-flash", history=formatted_history)
+            # Чат сесс эхлүүлж хариу авах
+            chat = client.chats.create(model="gemini-2.0-flash", history=formatted_history)
             response = chat.send_message(prompt)
             
             st.markdown(response.text)
             st.session_state.messages.append({"role": "model", "content": response.text})
             
         except Exception as e:
-            st.error(st.error(f"Алдаа гарлаа: {e}"))
-        
+            st.error(f"Алдаа гарлаа: {e}")
