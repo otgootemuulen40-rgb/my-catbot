@@ -23,7 +23,7 @@ if prompt := st.chat_input("Юуны тухай ярилцах вэ?"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        try:
+   chat = client.chats.create(model="gemini-2.0-flash", history=formatted_history)
             # Өмнөх түүхийг Gemini-д тохирох хэлбэрт оруулах
             formatted_history = [
                 {"role": m["role"], "parts": [m["content"]]} 
